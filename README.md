@@ -1,5 +1,4 @@
-```markdown
-# 🚀 API Disruptive Technical Test
+## 🚀 API Disruptive Technical Test
 
 Bienvenido a la **API Disruptive Technical Test**. Esta API está construida con **Node.js**, **Express**, **MongoDB**, **Mongoose** y **Docker**. Aquí encontrarás todo lo que necesitas para comenzar a utilizarla de manera rápida y sencilla.
 
@@ -54,4 +53,3 @@ Esto detendrá y eliminará el contenedor, liberando los recursos utilizados.
 ---
 
 ¡Gracias por usar la **API Disruptive Technical Test**! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en el repositorio.
-```
