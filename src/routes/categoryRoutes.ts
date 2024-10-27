@@ -1,8 +1,13 @@
-import { Router } from 'express'; // Importamos el módulo Router de Express para manejar las rutas de la aplicación.
-import { createCategory } from '../controllers/categoryController'; // Importamos la función createCategory desde el controlador de categorías.
+import { Router } from 'express';
+import { createCategory, getCategories } from '../controllers/categoryController';
+import { authenticate } from '../middlewares/authenticate';
+import { authorize } from '../middlewares/authorize';
 
-const router = Router(); // Creamos una instancia del enrutador.
+const router = Router();
 
-router.post('/', createCategory); // Definimos una ruta POST en la raíz ('/') que ejecuta la función createCategory al recibir una solicitud.
+//@ts-ignore
+router.post('/', authenticate, authorize(['admin']), createCategory); // Solo admin puede crear categorías
+//@ts-ignore
+router.get('/', authenticate, authorize(['admin', 'lector', 'creador']), getCategories); // Todo pueden leer categorías
 
-export default router; // Exportamos el enrutador para que pueda ser utilizado en otras partes de la aplicación.
+export default router;

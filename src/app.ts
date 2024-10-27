@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+//@ts-ignore
 mongoose.connect(process.env.MONGODB_URI || '', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));

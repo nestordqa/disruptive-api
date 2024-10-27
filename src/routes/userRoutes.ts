@@ -1,8 +1,37 @@
-import { Router } from 'express'; // Importamos el módulo Router de Express para manejar rutas.
-import { createUser } from '../controllers/userController'; // Importamos la función createUser desde el controlador de usuarios.
+import { Router } from 'express';
+import { authenticate } from '../middlewares/authenticate';
+import { authorize } from '../middlewares/authorize';
+import {
+    registerUser,
+    getAllUsers,
+    getUserById,
+    updateUserById,
+    deleteUserById
+} from '../controllers/userController';
 
-const router = Router(); // Creamos una instancia del enrutador.
+const router = Router();
 
-router.post('/register', createUser); // Definimos una ruta POST en '/register' que ejecuta la función createUser al recibir una solicitud.
+//Ruta para el registro de usuarios
+//@ts-ignore
+router.post('/register', authenticate, authorize(['admin', 'creador']), registerUser);
 
-export default router; // Exportamos el enrutador para que pueda ser utilizado en otras partes de la aplicación.
+// Ruta para obtener todos los usuarios
+//@ts-ignore
+router.get('/users', authenticate, authorize(['admin', 'lector', 'creador']), getAllUsers);
+
+// Ruta para obtener un usuario por ID
+//@ts-ignore
+router.get('/users/:id', authenticate, authorize(['admin', 'lector', 'creador']), getUserById);
+
+// Ruta para actualizar un usuario por ID
+//@ts-ignore
+router.put('/users/:id', authenticate, authorize(['admin', 'creador']), updateUserById);
+
+// Ruta para eliminar un usuario por ID
+//@ts-ignore
+router.delete('/users/:id', authenticate, authorize(['admin']), deleteUserById);
+
+//@ts-ignore
+router.post('/login', loginUser);
+
+export default router;

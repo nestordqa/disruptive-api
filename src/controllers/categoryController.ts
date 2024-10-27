@@ -1,14 +1,23 @@
-import { Request, Response } from 'express'; // Importamos Request y Response de Express.
-import Category from '../models/Category'; // Importamos el modelo Category.
+import { Request, Response } from 'express';
+import Category from '../models/Category';
 
-export const createCategory = async (req: Request, res: Response) => {
-  const { name, permissions } = req.body; // Extraemos datos del cuerpo de la solicitud.
-  
+export const createCategory = async (req: Request, res: Response): Promise<void> => {
+  const { name, permissions } = req.body;
+
   try {
-    const category = new Category({ name, permissions }); // Creamos una nueva instancia de Category.
-    await category.save(); // Guardamos la categoría en la base de datos.
-    res.status(201).json(category); // Respondemos con la categoría creada.
+    const category = new Category({ name, permissions });
+    await category.save();
+    res.status(201).json(category);
   } catch (error: any) {
-    res.status(400).json({ error: error.message }); // Respondemos con un mensaje de error.
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getCategories = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const categories = await Category.find();
+    res.status(200).json(categories);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 };
