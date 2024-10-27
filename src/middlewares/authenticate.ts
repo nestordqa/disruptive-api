@@ -4,9 +4,11 @@ import User from '../models/User';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
   // Excluye endpoints que no necesitan validacion
-  if (req.path === '/api/login/') {
+  if (req.path === '/api/login/' || req.path.includes('/api-docs/')) {
     return next();
   }
+
+  console.log(req.path)
 
   const token = req.headers.authorization?.split(' ')[1];
 

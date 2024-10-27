@@ -1,5 +1,5 @@
 import { authenticate } from "./middlewares/authenticate";
-
+const { setupSwagger } = require('./swagger');
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -29,7 +29,9 @@ app.use('/api/', contentRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`May the force be with you on port ${PORT} 🌟👊🏼`);
+  //DOCUMENTACION SWAGGER
+  setupSwagger(app);
 });
 
 module.exports = app;
