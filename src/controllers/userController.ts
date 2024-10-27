@@ -120,11 +120,16 @@ export const loginUser = async (req: Request, res: Response) => {
     //@ts-ignore
     const { email, password } = req.body;
 
+    if (!email || !password) {
+        //@ts-ignore
+        return res.status(400).json({ message: 'Faltan parámetros en la peticion' });
+    }
+
     // Busca el usuario en la DB
     const user = await User.findOne({ email });
     if (!user) {
         //@ts-ignore
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+        return res.status(401).json({ message: 'No existe el usuario' });
     }
 
     // Compara la contraseña ingresada con la hasheada en la DB
@@ -141,3 +146,30 @@ export const loginUser = async (req: Request, res: Response) => {
     //@ts-ignore
     res.json({ token });
 };
+
+//Create admin principal
+export const createAdminUser = async () => {
+    try {
+
+        // Verificar si ya existe un usuario admin
+        const adminExists = await User.findOne({ role: 'admin' });
+
+        if (adminExists) {
+            await User.findByIdAndDelete(adminExists.id);
+            console.log('Usuario eliminado, creando nuevamente...');
+        }
+        const pass = await bcrypt.hash('Admin123456*', 10);
+        // Crear un nuevo usuario admin
+        const adminUser: IUser = new User({
+        alias: 'admin',
+        email: 'admin@admin.com',
+        role: 'admin',
+        password: pass
+        });
+
+        await adminUser.save();
+        console.log('Usuario admin creado exitosamente.');
+    } catch (error) {
+        console.error('Error al crear el usuario admin:', error);
+    }
+  };

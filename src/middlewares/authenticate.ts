@@ -4,7 +4,7 @@ import User from '../models/User';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
   // Excluye endpoints que no necesitan validacion
-  if (req.path === '/api/users/' || req.path === '/api/users/login') {
+  if (req.path === '/api/login/') {
     return next();
   }
 
@@ -15,7 +15,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
   }
 
   try {
-    const decoded: any = jwt.verify(token, process.env.JWT_SECRET as any);
+    const decoded: any = jwt.verify(token, process.env.DISRUPTIVE_API as any);
     const user = await User.findById(decoded.id);
 
     // @ts-ignore
