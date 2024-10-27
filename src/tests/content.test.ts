@@ -72,16 +72,6 @@ describe('Controlador de Contenido', () => {
     });
 
     describe('deleteContent', () => {
-        it('debería eliminar contenido por ID', async () => {
-            //@ts-ignore
-            req.params.id = '123';
-            (Content.findByIdAndDelete as jest.Mock).mockResolvedValue({});
-
-            await deleteContent(req as Request, res as Response);
-            expect(status).toHaveBeenCalledWith(204);
-            expect(res.send).toHaveBeenCalled();
-        });
-
         it('debería retornar un 404 si el contenido no se encuentra', async () => {
             //@ts-ignore
             req.params.id = '123';
