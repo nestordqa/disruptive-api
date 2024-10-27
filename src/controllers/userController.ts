@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 //Chequea que se haya levantado la API.
-exports.checkApi = async (req: any, res: any) => {
+export const checkApi = (req: any, res: any) => {
     res.status(200).json({ message: 'May the force be with you 🌟👊🏼' });
     return;
 };
