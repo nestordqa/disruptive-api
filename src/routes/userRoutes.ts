@@ -1,37 +1,32 @@
-import { Router } from 'express';
-import { authenticate } from '../middlewares/authenticate';
-import { authorize } from '../middlewares/authorize';
-import {
-    registerUser,
-    getAllUsers,
-    getUserById,
-    updateUserById,
-    deleteUserById
-} from '../controllers/userController';
+const express = require('express');
+const userRoutes = express.Router();
 
-const router = Router();
+const user = require('../controllers/userController');
+
+//Ruta para verificar funcionamiento de la API
+userRoutes.get('/', user.checkApi);
 
 //Ruta para el registro de usuarios
 //@ts-ignore
-router.post('/register', authenticate, authorize(['admin', 'creador']), registerUser);
+userRoutes.post('/register', user.registerUser);
 
 // Ruta para obtener todos los usuarios
 //@ts-ignore
-router.get('/users', authenticate, authorize(['admin', 'lector', 'creador']), getAllUsers);
+userRoutes.get('/users', user.getAllUsers);
 
 // Ruta para obtener un usuario por ID
 //@ts-ignore
-router.get('/users/:id', authenticate, authorize(['admin', 'lector', 'creador']), getUserById);
+userRoutes.get('/users/:id', user.getUserById);
 
 // Ruta para actualizar un usuario por ID
 //@ts-ignore
-router.put('/users/:id', authenticate, authorize(['admin', 'creador']), updateUserById);
+userRoutes.put('/users/:id', user.updateUserById);
 
 // Ruta para eliminar un usuario por ID
 //@ts-ignore
-router.delete('/users/:id', authenticate, authorize(['admin']), deleteUserById);
+userRoutes.delete('/users/:id', user.deleteUserById);
 
 //@ts-ignore
-router.post('/login', loginUser);
+userRoutes.post('/login', user.loginUser);
 
-export default router;
+module.exports = userRoutes;
