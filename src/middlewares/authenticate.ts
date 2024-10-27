@@ -8,8 +8,6 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     return next();
   }
 
-  console.log(req.path)
-
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
@@ -23,7 +21,6 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     // @ts-ignore
     req.user = user;
 
-    // Role-based access control
     // @ts-ignore
     if (user.role === 'lector') {
       // Solo permite peticiones GET

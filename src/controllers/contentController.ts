@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'; // Importamos Request y Response de Express.
-import Content from '../models/Content'; // Importamos el modelo Content.
+import { Request, Response } from 'express';
+import Content from '../models/Content';
 
 //Crea nuevo contenido
 export const createContent = async (req: Request, res: Response): Promise<any> => {
@@ -26,7 +26,7 @@ export const createContent = async (req: Request, res: Response): Promise<any> =
 //Obtiene todo el contenido cargado en la DB
 export const getAllContent = async (req: Request, res: Response): Promise<void> => {
   try {
-    const contentList = await Content.find().populate('category user'); // Populate category and user details
+    const contentList = await Content.find().populate('category user');
     res.status(200).json(contentList);
   } catch (error: any) {
     res.status(500).json({ error: 'Error al obtener el contenido: ' + error.message });
@@ -82,7 +82,7 @@ export const deleteContent = async (req: Request, res: Response): Promise<any> =
     if (!deletedContent) {
       return res.status(404).json({ error: 'Contenido no encontrado' });
     }
-    res.status(204).send(); // No content
+    res.status(204).send();
   } catch (error: any) {
     res.status(500).json({ error: 'Error al eliminar el contenido: ' + error.message });
   }

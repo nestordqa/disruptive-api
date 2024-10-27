@@ -64,7 +64,7 @@ export const deleteCategory = async (req: Request, res: Response): Promise<any> 
     if (!deletedCategory) {
       return res.status(404).json({ error: 'Categoría no encontrada' });
     }
-    res.status(204).send(); // No content
+    res.status(204).send();
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
