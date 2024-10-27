@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const contentRoutes = require('./routes/contentRoutes');
 const { createAdminUser } = require('./controllers/userController');
 
 dotenv.config();
@@ -24,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(authenticate);
 app.use('/api/', userRoutes);
 app.use('/api/', categoryRoutes);
-// app.use('/api/contents', contentRoutes);
+app.use('/api/', contentRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -34,7 +34,7 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 // Leer todos los usuarios
-export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+export const getAllUsers = async (req: Request, res: Response): Promise<any> => {
     try {
         const users = await User.find();
         //@ts-ignore

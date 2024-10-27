@@ -1,8 +1,21 @@
-import { Router } from 'express'; // Importamos el módulo Router de Express para manejar las rutas de la aplicación.
-import { createContent } from '../controllers/contentController'; // Importamos la función createContent desde el controlador de contenido.
+//@ts-ignore
+const express = require('express');
+const contentRoutes = express.Router();
+const content = require('../controllers/contentController');
 
-const router = Router(); // Creamos una instancia del enrutador.
+// Endpoint to create a new content
+contentRoutes.post('/content', content.createContent);
 
-router.post('/', createContent); // Definimos una ruta POST en la raíz ('/') que ejecuta la función createContent al recibir una solicitud.
+// Endpoint to get all content
+contentRoutes.get('/content', content.getAllContent);
 
-export default router; // Exportamos el enrutador para que pueda ser utilizado en otras partes de la aplicación.
+// Endpoint to get a content by ID
+contentRoutes.get('/content/:id', content.getContentById);
+
+// Endpoint to update a content by ID
+contentRoutes.put('/content/:id', content.updateContent);
+
+// Endpoint to delete a content by ID
+contentRoutes.delete('/content/:id', content.deleteContent);
+
+module.exports = contentRoutes;
