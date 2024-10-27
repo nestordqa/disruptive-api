@@ -50,6 +50,15 @@ npm run docker:down
 
 Esto detendrá y eliminará el contenedor, liberando los recursos utilizados.
 
+## VER DOCUMENTACIÓN
+
+Si precisas ver la documentación de esta API Rest, puedes ingresar al enlace de abajo y verás todo lo referente a rutas y parametos:
+
+```bash
+http://localhost:5000/api-docs/
+```
+
+
 ---
 
 ¡Gracias por usar la **API Disruptive Technical Test**! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en el repositorio.
