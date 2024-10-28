@@ -1,4 +1,4 @@
-## 🚀 API Disruptive Technical Test
+## 🚀 Disruptive Technical Test API Rest
 
 Bienvenido a la **API Disruptive Technical Test**. Esta API está construida con **Node.js**, **Express**, **MongoDB**, **Mongoose** y **Docker**. Aquí encontrarás todo lo que necesitas para comenzar a utilizarla de manera rápida y sencilla.
 
@@ -61,4 +61,4 @@ http://localhost:5000/api-docs/
 
 ---
 
-¡Gracias por usar la **API Disruptive Technical Test**! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en el repositorio.
+¡Gracias por usar la **Disruptive Technical Test API Rest**! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en el repositorio.🌟
