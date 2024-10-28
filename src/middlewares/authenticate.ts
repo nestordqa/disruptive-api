@@ -4,7 +4,7 @@ import User from '../models/User';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
   // Excluye endpoints que no necesitan validacion
-  if (req.path === '/api/login/' || req.path.includes('/api-docs/')) {
+  if (req.path === '/api/login/' || req.path.includes('/api-docs/') || req.path.includes('/register')) {
     return next();
   }
 
@@ -27,12 +27,14 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
       if (req.method !== 'GET') {
         return res.status(403).json({ message: 'Acceso denegado: solo se permiten solicitudes GET' });
       }
+      return next();
       // @ts-ignore
     } else if (user.role === 'creador') {
       // Permite todas las peticiones menos DELETE
       if (req.method === 'DELETE') {
         return res.status(403).json({ message: 'Acceso denegado: no se permiten solicitudes DELETE' });
       }
+      return next();
       // @ts-ignore
     } else if (user.role === 'admin') {
       //El admin puede acceder a cualquier endpoint

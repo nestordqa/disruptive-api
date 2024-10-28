@@ -1,4 +1,5 @@
 import { authenticate } from "./middlewares/authenticate";
+const cors = require('cors');
 const { setupSwagger } = require('./swagger');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,6 +13,8 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 //@ts-ignore
 mongoose.connect(process.env.MONGODB_URI)
